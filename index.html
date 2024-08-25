@@ -355,13 +355,51 @@ const songs = [
 
 
 
+
+
+        const muteBtn = document.createElement('button');
+        muteBtn.id = 'muteBtn';
+        muteBtn.innerHTML = '💔';
+        document.body.appendChild(muteBtn);
+
+
+
+        // Apply styles to the mute/unmute button
+        muteBtn.style.position = 'fixed';
+        muteBtn.style.top = '20px';
+        muteBtn.style.right = '20px';
+        muteBtn.style.padding = '10px';
+        muteBtn.style.background = 'transparent';
+        muteBtn.style.border = 'none';
+        muteBtn.style.fontSize = '24px';
+        muteBtn.style.cursor = 'pointer';
+        muteBtn.style.zIndex = '2000';
+        muteBtn.style.transition = 'transform 0.2s ease';
+        // Mute/unmute functionality
+        let isMuted = true;
+
+        muteBtn.addEventListener('click', function () {
+            isMuted = !isMuted;
+            muteBtn.innerHTML = isMuted ? '💔' : '❤️';
+
+            if (!isMuted) {
+                playRandomSong();
+            } else {
+                audioElement.pause();
+            }
+        });
+
         function playRandomSong() {
-        const randomSong = songs[Math.floor(Math.random() * songs.length)];
-        audioElement.src = randomSong;
-        audioElement.play();
-        audioElement.onended = playRandomSong;
+            const randomSong = songs[Math.floor(Math.random() * songs.length)];
+            audioElement.src = randomSong;
+            audioElement.play();
+            audioElement.onended = playRandomSong;
         }
-        playRandomSong();
+
+        // Only autoplay music if not muted
+        if (!isMuted) {
+            playRandomSong();
+        }
 
 
         function getBirthday() {
@@ -482,22 +520,7 @@ const songs = [
 
 
 
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-            document.body.appendChild(heart);
-
-
-            const size = Math.random() * 20 + 30;
-            heart.style.width = `${size}px`;
-            heart.style.height = `${size}px`;
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.top = Math.random() * 100 + 'vh';
-
-            heart.addEventListener('animationend', () => {
-                heart.remove();
-            });
-        }
+        createHeart();
 
         setInterval(createHeart, 1000);
 
