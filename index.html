@@ -334,16 +334,16 @@
     <button id="wishBtn">Wish Now!</button>
 
     <script>
-
-        const audioElement = document.getElementById('backgroundMusic');
-               const songs = [
-    './s1.mp3',
-    './s2.mp3',
-    './s3.mp3',
-    './s4.mp3',
-    './s5.mp3',
-    './s6.mp3',
-    './s7.mp3'
+const baseURL = 'https://yourmanlight.github.io/AMI/';
+const audioElement = document.getElementById('backgroundMusic');
+const songs = [
+`${baseURL}s1.mp3`,
+`${baseURL}s2.mp3`,
+`${baseURL}s3.mp3`,
+`${baseURL}s4.mp3`,
+`${baseURL}s5.mp3`,
+`${baseURL}s6.mp3`,
+`${baseURL}s7.mp3`
 ];
         const countdownElement = document.getElementById('countdown');
         const heading = document.getElementById('heading');
