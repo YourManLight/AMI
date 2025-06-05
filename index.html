@@ -334,24 +334,27 @@
     <button id="wishBtn">Wish Now!</button>
 
     <script>
+// Constants
 const baseURL = 'https://yourmanlight.github.io/AMI/';
 const audioElement = document.getElementById('backgroundMusic');
 const songs = [
-`${baseURL}s1.opus`,
-`${baseURL}s2.opus`,
-`${baseURL}s3.opus`,
-`${baseURL}s4.opus`,
-`${baseURL}s5.opus`,
-`${baseURL}s6.opus`,
-`${baseURL}s7.opus`
+    `${baseURL}s1.opus`,
+    `${baseURL}s2.opus`,
+    `${baseURL}s3.opus`,
+    `${baseURL}s4.opus`,
+    `${baseURL}s5.opus`,
+    `${baseURL}s6.opus`,
+    `${baseURL}s7.opus`
 ];
-        const countdownElement = document.getElementById('countdown');
-        const heading = document.getElementById('heading');
-        const wishBtn = document.getElementById('wishBtn');
-        const finalMessage = document.getElementById('finalMessage');
-        const tntOverlay = document.getElementById('tntOverlay');
-        const balloons = document.querySelectorAll('.balloons');
-        const ribbons = document.querySelectorAll('.ribbons');
+
+// DOM Elements
+const countdownElement = document.getElementById('countdown');
+const heading = document.getElementById('heading');
+const wishBtn = document.getElementById('wishBtn');
+const finalMessage = document.getElementById('finalMessage');
+const tntOverlay = document.getElementById('tntOverlay');
+const balloons = document.querySelectorAll('.balloons');
+const ribbons = document.querySelectorAll('.ribbons');
 
 
 
@@ -380,14 +383,18 @@ const songs = [
 
         muteBtn.addEventListener('click', function () {
             isMuted = !isMuted;
-            muteBtn.innerHTML = isMuted ? '💔' : '❤️';
+            muteBtn.innerHTML = isMuted ? '💔' : '❤️'; // Update button text
 
             if (!isMuted) {
-                playRandomSong();
+                playRandomSong(); // Play music if unmuted
             } else {
-                audioElement.pause();
+                audioElement.pause(); // Pause music if muted
             }
         });
+
+        // Play initial random song
+        playRandomSong();
+        audioElement.pause();
 
         function playRandomSong() {
             const randomSong = songs[Math.floor(Math.random() * songs.length)];
@@ -396,9 +403,13 @@ const songs = [
             audioElement.onended = playRandomSong;
         }
 
-        // Only autoplay music if not muted
+        // Autoplay music if heart is red (music on)
         if (!isMuted) {
             playRandomSong();
+        } else {
+            muteBtn.innerHTML = '❤️';
+            playRandomSong();
+            audioElement.pause();
         }
 
 
@@ -519,10 +530,6 @@ const songs = [
         });
 
 
-
-        createHeart();
-
-        setInterval(createHeart, 1000);
 
     </script>
 </body>
